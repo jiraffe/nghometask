@@ -1,0 +1,14 @@
+<div class="activity-desc">
+  <h5>
+    <div (click)="shareSelectedHotel(hotel)" href="#" class="pointer">{{hotel.title}}</div>
+  </h5>
+  <p>{{hotel.address.street}}</p>
+  <p>{{hotel.address.city}}</p>
+  <h6 appPhone [hotel]="hotel"></h6>
+</div>
+<div class="activity-img">
+  <div *ngFor="let preview of hotel.previews">
+    <img src='assets/images/hotel_preview/{{hotel._id}}/{{preview}}.jpg'/>
+  </div>
+</div>
+<div class="clear"></div>

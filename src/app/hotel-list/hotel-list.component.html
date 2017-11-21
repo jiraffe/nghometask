@@ -1,0 +1,25 @@
+<div class="element-bg-img"><img src="assets/images/hotel_preview/{{selectedHotel._id}}/big.jpg" alt=""
+                                 class="img-responsive"></div>
+<div class="element-left-bottom">
+  <div class="ele-strip">
+    <ul>
+      <li class="pointer" *ngFor="let filter of filters" (click)="selectFilter(filter)">{{filter | titlecase}}</li>
+    </ul>
+  </div>
+  <div class="village">
+    <h3>Righteous indignation & like</h3>
+    <span class="line"> </span>
+    <div class="activity_box">
+      <div class="scrollbar" id="style-2">
+        <div *ngIf="hotels$ | async | hotelFilter:selectedFilter as hotels; else emptyHotelList">
+          <div class="activity-row" *ngFor="let hotel of hotels">
+            <app-hotel [hotel]="hotel" (selectedHotelEvent)="recieveHotel($event)"></app-hotel>
+          </div>
+        </div>
+        <ng-template #emptyHotelList>
+          Sorry, no hotels for that filter
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

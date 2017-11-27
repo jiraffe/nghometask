@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FollowComponent } from './follow.component';
+import { FollowComponent } from './social.component';
 
 describe('FollowComponent', () => {
   let component: FollowComponent;

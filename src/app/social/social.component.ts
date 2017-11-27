@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { HotelsService } from '../common/services/hotels.service';
 
 @Component({
-  selector: 'app-weather',
-  templateUrl: './weather.component.html',
-  styleUrls: ['./weather.component.css']
+  selector: 'app-social',
+  templateUrl: './social.component.html',
+  styleUrls: ['./social.component.css']
 })
-export class WeatherComponent implements OnInit {
+export class SocialComponent implements OnInit {
 
   public hotel: Hotel;
 

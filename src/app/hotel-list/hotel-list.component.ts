@@ -1,7 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { hotels$ } from '../data';
+import { HotelsService } from '../common/services/hotels.service';
 
 @Component({
   selector: 'app-hotel-list',
@@ -12,35 +13,19 @@ import { hotels$ } from '../data';
 export class HotelListComponent implements OnInit {
 
   public hotels$: Observable<Hotel[]>;
-  public selectedHotel: Hotel;
   public filters: string[];
   public selectedFilter: string;
+  public selectedHotel: Hotel;
 
-  // there should be Services!
-  @Output()
-  public selectedHotelEvent: EventEmitter<Hotel> = new EventEmitter<Hotel>();
-
-  public shareSelectedHotel(hotel: Hotel): void {
-    this.selectedHotel = hotel;
-    this.selectedHotelEvent.emit(this.selectedHotel);
-  }
+  public constructor(
+    private _hotelService: HotelsService
+  ) {}
 
   public ngOnInit(): void {
-
     this.filters = ['hotel', 'fishing', 'tours', 'weather', 'all'];
+    this.hotels$ = this._hotelService.hotels$;
 
-    this.hotels$ = hotels$;
-    this.hotels$.subscribe({
-      next: x => {
-        this.selectedHotel = x[0];
-        this.selectedHotelEvent.emit(x[0]);
-      }
-    });
-  }
-
-  public recieveHotel($event: Hotel): void {
-    this.selectedHotel = $event;
-    this.selectedHotelEvent.emit($event);
+    this._hotelService.selectedHotel.subscribe((selectedHotel: Hotel) => this.selectedHotel = selectedHotel);
   }
 
   public selectFilter(filter: string): void {

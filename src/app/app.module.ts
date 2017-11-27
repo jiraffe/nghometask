@@ -5,11 +5,14 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HotelListComponent } from './hotel-list/hotel-list.component';
 import { WeatherComponent } from './weather/weather.component';
-import { FollowComponent } from './follow/follow.component';
-import { DataShareComponent } from './data-share/data-share.component';
+import { SocialComponent } from './social/social.component';
 import { HotelFilterPipe } from './common/pipes/hotel-filter.pipe';
-import { PhoneDirective } from './common/directives/phone.directive';
 import { HotelComponent } from './hotel-list/hotel/hotel.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HotelsService } from './common/services/hotels.service';
+import { BASE_URL, BASE_URL_TOKEN } from './config';
+import { HighlightDirective } from './common/directives/highlight.directive';
+import { PhonePipe } from './common/pipes/phone.pipe';
 
 
 @NgModule({
@@ -17,16 +20,20 @@ import { HotelComponent } from './hotel-list/hotel/hotel.component';
     AppComponent,
     HotelListComponent,
     WeatherComponent,
-    FollowComponent,
-    DataShareComponent,
+    SocialComponent,
     HotelFilterPipe,
-    PhoneDirective,
-    HotelComponent
+    HotelComponent,
+    HighlightDirective,
+    PhonePipe
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    HotelsService,
+    { provide: BASE_URL_TOKEN, useValue: BASE_URL }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
